@@ -139,9 +139,10 @@ def continuity(n_of_gp, conn):
         for n, r in enumerate(score_and_matrix(i, conn)[0]):
             d[player_names[n]].append(d[player_names[n]][-1] + r)
 
+    x = [i+1 for i in range(n_of_gp)]
     # plot
     for key, val in d.items():
-        plt.plot(val, label=key)
+        plt.plot(x, val, 'o-', label=key)
     plt.legend(loc='lower center')
     plt.ylabel("Pocet bodov")
     plt.xlabel("Poradie velkej cena")

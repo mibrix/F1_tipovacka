@@ -104,10 +104,6 @@ def answers(gp_id, conn):
             return out + "yellow"
 
     display(df.style.apply(lambda c: df_bool[c.name].apply(color_boolean)))
-    cm = df.style.apply(lambda c: df_bool[c.name].apply(color_boolean)).set_precision(3).render()
-
-    with open(f'{gp_id}.html', 'w') as f:
-        f.write(cm)
 
 
 # https://stackoverflow.com/questions/72236704/highlight-element-based-on-boolean-pandas-df

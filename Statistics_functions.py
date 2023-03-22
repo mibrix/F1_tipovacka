@@ -143,6 +143,8 @@ def continuity(n_of_gp, conn):
     for key, val in d.items():
         plt.plot(val, label=key)
     plt.legend(loc='lower center')
+    plt.ylabel("Pocet bodov")
+    plt.xlabel("Poradie velkej cena")
     plt.show()
     print(d)
 

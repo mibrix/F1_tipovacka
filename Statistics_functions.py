@@ -145,7 +145,7 @@ def continuity(n_of_gp, conn):
         plt.plot(x, val, 'o-', label=key)
     plt.legend(loc='lower center')
     plt.ylabel("Pocet bodov")
-    plt.xlabel("Poradie velkej cena")
+    plt.xlabel("Poradie velkej ceny")
     plt.show()
     print(d)
 

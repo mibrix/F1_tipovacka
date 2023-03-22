@@ -3,7 +3,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import sqlite3
 
-def score_and_matrix(gp_id):
+def score_and_matrix(gp_id, conn):
+
+    c = conn.cursor()
 
     player_names = ["Wonde", "Tome", "Hrici", "Kajlo", "Sasu", "OG"]
     matrix_of_ans = {}
@@ -55,7 +57,8 @@ def score_and_matrix(gp_id):
     return (score, matrix_of_ans, percentage)
 
 
-def answers(gp_id):
+def answers(gp_id, conn):
+    c = conn.cursor()
 
     player_names = ["Wonde", "Tome", "Hrici", "Kajlo", "Sasu", "OG"]
     d = {"Wonde": [None for _ in range(15)], "Tome": [None for _ in range(15)], "Hrici": [None for _ in range(15)],
@@ -68,10 +71,10 @@ def answers(gp_id):
         d[player_names[int(ans[1]) - 1]][ans[0] - 1] = ans[3]
 
     # add score
-    for n, score in enumerate(score_and_matrix(gp_id)[0]):
+    for n, score in enumerate(score_and_matrix(gp_id, conn)[0]):
         d[player_names[n]].append(score)
 
-    for n, per in enumerate(score_and_matrix(gp_id)[2]):
+    for n, per in enumerate(score_and_matrix(gp_id, conn)[2]):
         d[player_names[n]].append(per)
 
     df = pd.DataFrame(data=d)
@@ -87,8 +90,9 @@ def answers(gp_id):
     df.index = questions
 
     # matrix of correctness
-    df_bool = pd.DataFrame(score_and_matrix(gp_id)[1])
+    df_bool = pd.DataFrame(score_and_matrix(gp_id, conn)[1])
     df_bool.index = questions
+
 
     def color_boolean(val):
         out = 'background-color: '
@@ -104,12 +108,12 @@ def answers(gp_id):
 
 # https://stackoverflow.com/questions/72236704/highlight-element-based-on-boolean-pandas-df
 
-def sum_pts(n_of_gp):
+def sum_pts(n_of_gp, conn):
 
     player_names = ["Wonde", "Tome", "Hrici", "Kajlo", "Sasu", "OG"]
-    score = score_and_matrix(1)[0]
+    score = score_and_matrix(1, conn)[0]
     for i in range(2, n_of_gp + 1):
-        for n, r in enumerate(score_and_matrix(i)[0]):
+        for n, r in enumerate(score_and_matrix(i, conn)[0]):
             score[n] += r
 
     # plot
@@ -126,13 +130,13 @@ def sum_pts(n_of_gp):
 
 
 
-def continuity(n_of_gp):
+def continuity(n_of_gp, conn):
 
     player_names = ["Wonde", "Tome", "Hrici", "Kajlo", "Sasu", "OG"]
-    score = score_and_matrix(1)[0]
+    score = score_and_matrix(1, conn)[0]
     d = {player_names[i]: [score[i]] for i in range(len(player_names))}
     for i in range(2, n_of_gp + 1):
-        for n, r in enumerate(score_and_matrix(i)[0]):
+        for n, r in enumerate(score_and_matrix(i, conn)[0]):
             d[player_names[n]].append(d[player_names[n]][-1] + r)
 
     # plot

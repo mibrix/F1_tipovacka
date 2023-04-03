@@ -2,12 +2,14 @@ import pandas as pd
 import sqlite3
 
 player_names = ["Wonde", "Tome", "Hrici", "Kajlo", "Sasu", "OG"]
-file_name = r'Tipovačka F1 - Saudi Arabian Grand Prix (odpovede)'
-grand_prix_id = 2
+file_name = r'Tipovačka F1 - Australia (odpovede)'
+grand_prix_id = 3
 #Bahrain
 #ground_truth = ["VER", "PER", "ALO", "ZHO", "NOR", ["OCO", "LEC", "PIA"], "Nie", "Nie", "Ano", "Nie", "Ano", "Nie", "Redbull", "VER", "Redbull"]
 #Jedah
-ground_truth = ["PER", "VER", "ALO", "VER", "BOT", ["STR", "ALB"], "Nie", "Ano", "Nie", "Nie", "Ano", "Nie", "Ano-Redbull", "VER", "Redbull"]
+#ground_truth = ["PER", "VER", "ALO", "VER", "BOT", ["STR", "ALB"], "Nie", "Ano", "Nie", "Nie", "Ano", "Nie", "Ano-Redbull", "VER", "Redbull"]
+#Australia
+ground_truth = ['Verstappen','Hamilton','Alonso','Perez','Sainz',['Galsy','Ocon','de Vries','Sargeant','Magnussen','Russell','Albon','Leclerc'],'Áno','Áno', 'Áno', 'Áno', 'Áno', 'Nie', 'nie','Verstappen','Red Bull']
 
 
 df = pd.read_csv(f'{file_name}.csv')

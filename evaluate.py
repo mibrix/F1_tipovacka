@@ -2,15 +2,16 @@ import pandas as pd
 import sqlite3
 
 player_names = ["Wonde", "Tome", "Hrici", "Kajlo", "Sasu", "OG"]
-file_name = r'Tipovačka F1 - Australia (odpovede)'
-grand_prix_id = 3
+file_name = r'Tipovačka F1 - Azerbajdzan'
+grand_prix_id = 4
 #Bahrain
 #ground_truth = ["VER", "PER", "ALO", "ZHO", "NOR", ["OCO", "LEC", "PIA"], "Nie", "Nie", "Ano", "Nie", "Ano", "Nie", "Redbull", "VER", "Redbull"]
 #Jedah
 #ground_truth = ["PER", "VER", "ALO", "VER", "BOT", ["STR", "ALB"], "Nie", "Ano", "Nie", "Nie", "Ano", "Nie", "Ano-Redbull", "VER", "Redbull"]
 #Australia
-ground_truth = ['Verstappen','Hamilton','Alonso','Perez','Sainz',['Galsy','Ocon','de Vries','Sargeant','Magnussen','Russell','Albon','Leclerc'],'Áno','Áno', 'Áno', 'Áno', 'Áno', 'Nie', 'nie','Verstappen','Red Bull']
-
+#ground_truth = ['Verstappen','Hamilton','Alonso','Perez','Sainz',['Galsy','Ocon','de Vries','Sargeant','Magnussen','Russell','Albon','Leclerc'],'Áno','Áno', 'Áno', 'Áno', 'Áno', 'Nie', 'nie','Verstappen','Red Bull']
+#Azerbajdzan
+ground_truth = ['Perez', 'Verstappen', 'Leclerc', 'Russel', 'Bottas', ['Zhou', 'de Vries'], 'Nie', 'Áno', 'Áno', 'Nie', 'Nie', 'Nie', 'Red Bull', 'Verstappen', 'Red Bull']
 
 df = pd.read_csv(f'{file_name}.csv')
 
@@ -18,7 +19,7 @@ conn = sqlite3.connect('F1-2023.db')
 c = conn.cursor()
 
 #insert players' answers into DB
-for i in range(len(df['Meno'])):
+for i in range(len(df['Username'])):
     for n,ans in enumerate(df.loc[i][2:]):
         if type(ans) == str:
             #print(f'''{n+1}, {player_names.index(df.loc[i][1].strip())+1}, {grand_prix_id}, {ans.strip()}''')
